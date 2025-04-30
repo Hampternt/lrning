@@ -1,4 +1,17 @@
 use std::io::stdin;
+mod guessing_game;
+
+enum Choices {
+    NumberGuessingGame,
+    EcoGame, 
+    Other
+}
+
+// Starts the program.
+fn main() {
+    println!("What function do you want to use?:");
+    return_right_option();
+}
 
 macro_rules! get_input {
     () => {
@@ -11,16 +24,46 @@ macro_rules! get_input {
     }
 }
 
-// Starts the program.
-fn main() {
-    println!("Hello, world!");
-    println!("having fun");
-    print_words_given_to_it("Something testington.");
+fn return_right_option() -> Choices {
+    println!("Running return right_option_function");
+    let function_names = ["Number Guessing Game.", "Print my word thing."];
 
-    let wellthisinice = get_input!();
+    println!("Here are the options choose one.");
+    for (index, item) in function_names.iter().enumerate() {
+        println!("{}. {}",index, item);  
+         
+    }
+    
+    //This gets the user input from the console.
+    let choice_string = get_input!();
+    //This converts the user input from a String to a i32 number which is needed for the choices
+    //match.
+    let choice_num: i32 = choice_string.trim().parse().expect("Please enter a valid number");
 
-    println!("Now print it.");
-    print_words_given_to_it(&wellthisinice);
+    //The choices Match, figures out which choice the user wants to run with and returns the
+    //choices value which then goes to Main. 
+    match choice_num {
+        1 => {
+            println!("You chose option 1, Number Guessing Game");
+            return Choices::NumberGuessingGame; 
+        },
+        2 => {
+            println!("You chose option 2, EcoGame");
+            return Choices::EcoGame;
+        },
+        _ => {
+            println!("You have chosen a non valid option");
+            return Choices::Other;
+        },
+    }
+}
+
+fn number_guessing_game() {
+    println!("Guess a number:");
+
+    let mut guess = get_input!();
+
+    println!("You guessed {}", guess);
 }
 
 //Prints the values of given arguments.
