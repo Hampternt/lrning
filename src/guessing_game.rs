@@ -1,9 +1,11 @@
-use std::io;
+use std::io::stdin;
+use crate::get_input;
+use rand;
 
-fn guessing_game() {
+pub fn guessing_game() {
     println!("Guess a number:");
 
-    let mut guess = get_input!();
+    let guess = get_input!();
 
     println!("You guessed {}", guess);
 }

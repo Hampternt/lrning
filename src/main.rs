@@ -10,9 +10,16 @@ enum Choices {
 // Starts the program.
 fn main() {
     println!("What function do you want to use?:");
-    return_right_option();
+    let choice:Choices = return_right_option();
+
+    match choice{
+        Choices::NumberGuessingGame => guessing_game::guessing_game(),
+        Choices::Other => println!("You chose other good job"),
+        Choices::EcoGame => println!("need to implement this later :3")
+    }
 }
 
+#[macro_export]
 macro_rules! get_input {
     () => {
         {
@@ -30,8 +37,7 @@ fn return_right_option() -> Choices {
 
     println!("Here are the options choose one.");
     for (index, item) in function_names.iter().enumerate() {
-        println!("{}. {}",index, item);  
-         
+        println!("{}. {}",index + 1, item);         
     }
     
     //This gets the user input from the console.
@@ -58,13 +64,7 @@ fn return_right_option() -> Choices {
     }
 }
 
-fn number_guessing_game() {
-    println!("Guess a number:");
 
-    let mut guess = get_input!();
-
-    println!("You guessed {}", guess);
-}
 
 //Prints the values of given arguments.
 fn print_words_given_to_it(words: &str){
